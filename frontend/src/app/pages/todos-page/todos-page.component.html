@@ -1,0 +1,21 @@
+
+
+<main class="mt-14">
+    
+    <app-create-todo-list></app-create-todo-list>
+
+    <p *ngIf="loading" class="text-center text-lg">Loading...</p>
+
+    <div 
+    *ngIf="todoService.todoLists"
+    class="container flex gap-10 flex-wrap justify-center"
+    >
+        <app-todo-list
+        *ngFor="let todoList of todoLists; let i = index;" 
+            [todoList]="todoList"
+        ></app-todo-list>
+        
+        <app-todo-list></app-todo-list>
+    </div>
+</main>
+

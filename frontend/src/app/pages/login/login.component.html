@@ -1,0 +1,43 @@
+<p>login works!</p>
+<div class="max-w-xs mx-auto mt-20">
+    <form 
+        (ngSubmit)="submitLogin()"
+        [formGroup]="loginForm"
+        class="rounded-3xl bg-zinc-900 px-10 mb-5 py-7 min-w-max shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+    >
+        <div class="mb-4 border-b border-gray-500">
+            <label 
+                for="username_login" 
+                class="block text-gray-600 text-sm font-bold mb-2"
+            >Username</label>
+            <input 
+                type="text"
+                class="bg-transparent w-full border-none outline-none mb-1"
+                id="username_login"
+                placeholder="Username"
+                formControlName="username"
+            >
+        </div>
+        <div class="mb-2 border-b border-gray-500" >
+            <label 
+                for="password_login"
+                class="block text-gray-600 text-sm font-bold mb-2"
+            >Password</label>
+            <input 
+                type="password"
+                class="bg-transparent w-full border-none outline-none mb-1"
+                id="password_login"
+                placeholder="******************"
+                formControlName="password"
+            >
+        </div>
+        <div class="flex items-center justify-between">
+            <button
+                class="bg-green-700 hover:bg-green-500 text-gray-700 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                type="submit"
+            >
+                Log in
+            </button>
+        </div>
+    </form>
+</div>
