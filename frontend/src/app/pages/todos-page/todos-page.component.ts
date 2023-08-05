@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ITodoList } from 'src/app/models/todoList';
-import { TodoService } from 'src/app/services/todo.service';
+import { TodoListService } from 'src/app/services/todo-list.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class TodosPageComponent implements OnInit{
   todoLists: ITodoList[];
 
   constructor(
-    public todoService: TodoService,
+    public todoService: TodoListService,
     public authService: AuthorizationService
     ) {
 

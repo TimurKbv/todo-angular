@@ -1,5 +1,5 @@
 
-import {  findUserByUserId, getAllUsers } from "../controllers/user.controller";
+import {  findUserByUserId, findUserByUserName, getAllUsers } from "../controllers/user.controller";
 import { Router } from "express";
 
 // Erstelle neue Router Instanz
@@ -10,9 +10,10 @@ userRouter.route('/')
 
 
 userRouter.route('/:username')
+    .get(findUserByUserName)
+
+userRouter.route('/user')
     .get(findUserByUserId)
-
-
 
 
 export default userRouter;

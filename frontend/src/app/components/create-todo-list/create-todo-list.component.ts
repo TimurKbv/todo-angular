@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUser } from 'src/app/models/user';
 import { AuthorizationService } from 'src/app/services/authorization.service';
-import { TodoService } from 'src/app/services/todo.service';
+import { TodoListService } from 'src/app/services/todo-list.service';
 
 @Component({
   selector: 'app-create-todo-list',
@@ -12,7 +12,7 @@ import { TodoService } from 'src/app/services/todo.service';
 export class CreateTodoListComponent implements OnInit {
 
   constructor(
-    private todoService: TodoService,
+    private todoService: TodoListService,
     private authService: AuthorizationService
   ) {}
 

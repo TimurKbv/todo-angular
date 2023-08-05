@@ -10,7 +10,7 @@ export async function getAllUsers(req: express.Request, res: express.Response) {
 }
 
 
-export async function findUserByUserId(req: express.Request, res: express.Response) {
+export async function findUserByUserName(req: express.Request, res: express.Response) {
     const username = req.params.username;
 
     try {
@@ -19,12 +19,30 @@ export async function findUserByUserId(req: express.Request, res: express.Respon
 
         res.send({
             success: true,
-            data: user
+            user: user
         });
     } catch (error) {
         res.status(error.code).send({
             success: false,
             message: error.message
         })
+    }
+}
+
+export async function findUserByUserId(req: express.Request, res: express.Response) {
+    const userId = get(req, 'tokenPayload.userId');
+    try {
+        let user = await UserModel.getUserById(userId);
+        console.log(user);
+
+        res.send({
+            success: true,
+            user: user
+        });
+    } catch (error) {
+        res.status(error.code).send({
+            success: false,
+            message: error.message
+        });
     }
 }

@@ -1,0 +1,19 @@
+<div
+    class="flex items-center justify-between my-4 rounded-2xl bg-gray-800 p-5"
+>
+
+    <form 
+    (ngSubmit)="submitNewTodo()"
+    [formGroup]="form"
+    >
+    <input 
+    type="text"
+    id="todo-add-input"
+    class="bg-transparent w-full border-none outline-none"
+    formControlName="text"
+    appFocus
+    #newTodo
+    >
+    </form>
+
+</div>

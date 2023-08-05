@@ -16,6 +16,8 @@ import { GlobalErrorComponent } from './compinents/global-error/global-error.com
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { EditTodoListNameComponent } from './components/edit-todo-list-name/edit-todo-list-name.component';
+import { AddTodoComponent } from './components/add-todo/add-todo.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     LoginComponent,
     RegisterComponent,
     NavigationComponent,
+    EditTodoListNameComponent,
+    AddTodoComponent,
   ],
   imports: [
     BrowserModule,

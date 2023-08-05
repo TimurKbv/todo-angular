@@ -13,10 +13,7 @@ export async function getAllTodoListsFromUser(req: Request, res: Response) {
     try {
         let allLists = await TodosModel.findByUserId(userId);
         console.log(allLists);
-        res.send({
-            success: true,
-            data: allLists
-        })
+        res.send(allLists)
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -30,10 +27,7 @@ export async function addTodoListToUser(req: Request, res: Response) {
     let listName = req.body.name;
     try {
         let newList = await TodosModel.addTodoList(userId, listName);
-        res.send({
-            success: true,
-            data: newList
-        })
+        res.send(newList)
     } catch (error) {
         res.status(400).send({
             error: error.message
@@ -48,10 +42,7 @@ export async function deleteTodoList(req: Request, res: Response) {
         let deletedTodoList = await TodosModel.deleteTodoListById(listId, userId);
         console.log('deleted list: ', deletedTodoList);
         
-        res.send({
-            success: true,
-            data: deletedTodoList
-        });
+        res.send(deletedTodoList);
     } catch (error) {
         console.log(error);
         res.status(error.code).send({
@@ -68,10 +59,7 @@ export async function editTodoList(req: Request, res: Response) {
     try {
         let editedTodoList = await TodosModel.updateTodoList(listId, userId, body);
         console.log(editedTodoList);
-        res.send({
-            success: true,
-            data: editedTodoList
-        });
+        res.send(editedTodoList);
     } catch (error) {
         console.log(error);
         res.status(error.code).send({
@@ -119,12 +107,14 @@ export async function addTodoToList(req: Request, res: Response) {
     let text = req.body.text;
     let listId = req.params.listId;
 
+    console.log('Todo add start >>> ', listId, req.body, userId);
+    
+
     try {
         let todoList = await TodosModel.addTodo(userId, text, listId);
-        res.send({
-            success: true,
-            data: todoList.todos
-        });
+        console.log(todoList);
+        
+        res.send(todoList);
     } catch (error) {
         res.status(error.code).send({
             error: error.message
@@ -159,10 +149,7 @@ export async function editTodoById(req: Request, res: Response) {
     try {
         let editedTodo = await TodosModel.editTodo(listId, todoId, userId, todoBody);
         console.log(editedTodo);
-        res.send({
-            success: true,
-            data: editedTodo
-        })
+        res.send(editedTodo)
     } catch (error) {
         console.log(error);
         res.status(error.code).send({
