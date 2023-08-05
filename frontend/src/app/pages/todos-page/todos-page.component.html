@@ -8,13 +8,15 @@
 
     <div 
     *ngIf="todoService.todoLists"
-    class="container flex gap-10 flex-wrap "
+    class="container flex gap-5 flex-wrap justify-center"
     >
         <app-todo-list
+        class="w-2/5 min-w-fit"
         *ngFor="let todoList of todoLists; let i = index;" 
             [todoList]="todoList"
         ></app-todo-list>
         
+
     </div>
 </main>
 
