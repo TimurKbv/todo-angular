@@ -24,12 +24,13 @@
         <app-todo
         *ngFor="let todo of todoList?.todos"
         [todo]="todo"
+        [todoList]="todoList"
         ></app-todo>
         
     </ul>
 
     <!-- ADD Todo -->
-    <div id="add-todo">
+    <div id="add-todo" class="mt-10">
         <button
         *ngIf="!addTodo"
             class="bg-green-400 text-gray-800 px-3 py-1 rounded"

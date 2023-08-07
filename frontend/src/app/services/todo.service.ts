@@ -23,7 +23,16 @@ export class TodoService  {
     }  
     }).pipe(tap(todo => console.log(todo)
     ))
+  }
+
+  updateTodo(listId: any, todo: ITodo, newData: any): Observable<ITodo> {
+    const token = localStorage.getItem('token');
     
+    return this.http.put<ITodo>(`http://localhost:8080/todolists/${listId}/todos/${todo._id}`, newData, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
   }
 
 }
