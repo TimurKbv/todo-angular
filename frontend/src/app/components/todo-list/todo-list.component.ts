@@ -19,9 +19,7 @@ export class TodoListComponent implements OnInit {
     ) { }
   
   addNewTodo(newTodo: ITodo) {
-    // this.todoList?.todos.push(newTodo)
-    this.todolistService.getAllLists()
-    console.log(this.todoList);
+    console.log(newTodo);
     this.addTodo = false;
 
   }

@@ -20,7 +20,21 @@
         </svg>
         </button>
 
-        <span> {{todo.text }} </span>
+        <span *ngIf="!edit"> {{todo.text }} </span>
+
+        <form 
+            class=""
+            (ngSubmit)="handleText()"
+            [formGroup]="form"
+        >
+        <input 
+            *ngIf="edit" 
+            type="text" 
+            class="bg-slate-950  border-none outline-none rounded-md "
+            formControlName="text"
+            appFocus
+        >
+        </form>
 
     </div>
     
@@ -43,7 +57,9 @@
         </svg>
         </button>
 
-        <button >
+        <button 
+            (click)="edit = true"
+        >
             <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 height="1.4em" 

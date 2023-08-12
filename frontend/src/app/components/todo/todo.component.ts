@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ITodo } from 'src/app/models/todo';
 import { ITodoList } from 'src/app/models/todoList';
 import { TodoService } from 'src/app/services/todo.service';
@@ -11,7 +12,20 @@ import { TodoService } from 'src/app/services/todo.service';
 export class TodoComponent {
   @Input() todo: ITodo;
   @Input() todoList?: ITodoList;
+  edit: boolean = false;
+
   constructor(private todoService: TodoService) {}
+
+  form = new FormGroup({
+    text: new FormControl<string>('', [
+
+    ] )
+  })
+
+  get text() {
+    return this.form.controls.text as FormControl;
+  }
+
 
   handleCheckbox() {
     console.log(this.todo);
@@ -32,6 +46,15 @@ export class TodoComponent {
 
   handleText() {
     console.log(this.todo);
+
+    this.todoService.updateTodo(this.todoList?._id, this.todo, {
+      text: this.form.value.text as string,
+      isChecked: this.todo.isChecked
+    }).subscribe(todo => {
+      console.log(todo);
+      this.todo = todo;
+    })
+    this.edit = false;
   }
 
   delete() {

@@ -9,7 +9,7 @@ import { TodoService } from 'src/app/services/todo.service';
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.css']
 })
-export class AddTodoComponent implements OnInit {
+export class AddTodoComponent {
   @Input() listId: string | undefined;
   @Output() newTodoEvent = new EventEmitter<ITodo>();
 
@@ -49,10 +49,5 @@ export class AddTodoComponent implements OnInit {
     }
     )
   }
-
-  ngOnInit(): void {
-    
-  }
-
  
 }

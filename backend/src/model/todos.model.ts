@@ -85,7 +85,7 @@ export async function addTodo(userId: string, text: string, listId: string) {
     // speichere neues todo in todolist und gebe zurück
     list.todos.push(newTodo);
     await list.save();
-    
+
     // finde das letzte(aktuell erstellte) todo und sende den zurück
     let lastTodo = list.todos[list.todos.length - 1];
     return lastTodo;
@@ -175,7 +175,7 @@ export async function editTodo(listId: string, todoId: string, userId: string, t
     console.log('List >>> ', list);
 
     // gebe bearbeitete todo zurück
-    return list;
+    return list.todos.find(todo => todo._id.toString() === todoId);
 }
 
 
