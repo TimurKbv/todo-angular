@@ -111,10 +111,10 @@ export async function addTodoToList(req: Request, res: Response) {
     
 
     try {
-        let todoList = await TodosModel.addTodo(userId, text, listId);
-        console.log(todoList);
+        let todo = await TodosModel.addTodo(userId, text, listId);
+        console.log(todo);
         
-        res.send(todoList);
+        res.send(todo);
     } catch (error) {
         res.status(error.code).send({
             error: error.message

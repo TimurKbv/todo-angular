@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { ITodo } from '../models/todo';
 import { Observable, tap } from 'rxjs';
+import { TodoListService } from './todo-list.service';
+import { ITodoList } from '../models/todoList';
 
 
 @Injectable({
@@ -10,7 +12,10 @@ import { Observable, tap } from 'rxjs';
 
 export class TodoService  {
 
-  constructor( private http: HttpClient) {
+  constructor( 
+    private http: HttpClient,
+    private todoListService: TodoListService
+    ) {
 
   }
 
@@ -21,7 +26,7 @@ export class TodoService  {
       headers: {
         'Authorization': `Bearer ${token}`
     }  
-    }).pipe(tap(todo => console.log(todo)
+    }).pipe(tap(list => console.log(list)
     ))
   }
 
@@ -33,6 +38,16 @@ export class TodoService  {
         'Authorization': `Bearer ${token}`
       }
     })
+  }
+
+  deleteTodo(listId: any, todoId: any): Observable<ITodo> {
+     const token = localStorage.getItem('token');
+
+     return this.http.delete<ITodo>(`http://localhost:8080/todolists/${listId}/todos/${todoId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+     })
   }
 
 }

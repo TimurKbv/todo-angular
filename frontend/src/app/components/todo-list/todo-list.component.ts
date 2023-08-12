@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ITodo } from 'src/app/models/todo';
 import { ITodoList } from 'src/app/models/todoList';
 import { TodoListService } from 'src/app/services/todo-list.service';
@@ -8,7 +8,7 @@ import { TodoListService } from 'src/app/services/todo-list.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit {
   @Input() todoList?: ITodoList;
 
   edit: boolean = false;
@@ -18,15 +18,23 @@ export class TodoListComponent {
     private todolistService: TodoListService
     ) { }
   
-    addNewTodo(newTodo: ITodo) {
-      this.todoList?.todos.push(newTodo)
-      console.log(this.todoList);
-      this.addTodo = false;
-    }
+  addNewTodo(newTodo: ITodo) {
+    // this.todoList?.todos.push(newTodo)
+    this.todolistService.getAllLists()
+    console.log(this.todoList);
+    this.addTodo = false;
+
+  }
 
   handleEdit() {
     console.log('is edit? ', this.edit);
     this.edit = !this.edit;
+  }
+    
+
+
+  ngOnInit(): void {
+    this.todolistService.getAllLists()
   }
 
 }

@@ -12,7 +12,7 @@
     >
         <app-todo-list
         class="w-2/5 min-w-fit"
-        *ngFor="let todoList of todoLists; let i = index;" 
+        *ngFor="let todoList of todoService.todoLists; let i = index;" 
             [todoList]="todoList"
         ></app-todo-list>
         

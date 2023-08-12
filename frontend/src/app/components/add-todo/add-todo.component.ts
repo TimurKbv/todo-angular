@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ITodo } from 'src/app/models/todo';
+import { TodoListService } from 'src/app/services/todo-list.service';
 import { TodoService } from 'src/app/services/todo.service';
 
 @Component({
@@ -12,7 +13,10 @@ export class AddTodoComponent implements OnInit {
   @Input() listId: string | undefined;
   @Output() newTodoEvent = new EventEmitter<ITodo>();
 
-  constructor(private todoService: TodoService) { }
+  constructor(
+    private todoService: TodoService, 
+    private todoListService: TodoListService
+    ) { }
 
   form = new FormGroup({
     text: new FormControl<string>('', [
@@ -30,7 +34,13 @@ export class AddTodoComponent implements OnInit {
       text: this.form.value.text as string,
       isChecked: false
 
-    }, this.listId).subscribe(() => {
+    }, this.listId).subscribe((todo) => {
+      
+      this.todoListService.todoLists.forEach(list => {
+        if (list._id === this.listId) {
+          list.todos.push(todo)
+        }
+      })
 
       this.newTodoEvent.emit({
         text: this.form.value.text as string,
