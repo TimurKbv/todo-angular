@@ -56,6 +56,8 @@ export async function editTodoList(req: Request, res: Response) {
     const userId = get(req, 'tokenPayload.userId');
     let listId = req.params.listId;
     let body = req.body;
+    console.log(body);
+    
     try {
         let editedTodoList = await TodosModel.updateTodoList(listId, userId, body);
         console.log(editedTodoList);

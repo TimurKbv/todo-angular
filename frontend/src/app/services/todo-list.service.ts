@@ -44,6 +44,14 @@ export class TodoListService {
     }).pipe(tap(list => this.todoLists.push(list)))
   }
 
+  updateTitle(listId: string , title: string): Observable<ITodoList> {
+    return this.http.put<ITodoList>(`http://localhost:8080/todolists/${listId}`, {name: title}, {
+      headers: {
+        'Authorization': `Bearer ${this.token}`
+      }
+    } )
+  }
+
   deleteTodoList(listId: string) {
     return this.http.delete('http://localhost:8080/todolists' + listId, {
       headers: {

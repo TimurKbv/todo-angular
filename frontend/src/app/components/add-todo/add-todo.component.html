@@ -3,16 +3,16 @@
 >
 
     <form 
-    (ngSubmit)="submitNewTodo()"
-    [formGroup]="form"
+        (ngSubmit)="submitNewTodo()"
+        [formGroup]="form"
     >
     <input 
-    type="text"
-    id="todo-add-input"
-    class="bg-transparent w-full border-none outline-none"
-    formControlName="text"
-    appFocus
-    #newTodo
+        type="text"
+        id="todo-add-input"
+        class="bg-transparent w-full border-none outline-none"
+        formControlName="text"
+        appFocus
+        #newTodo
     >
     </form>
 

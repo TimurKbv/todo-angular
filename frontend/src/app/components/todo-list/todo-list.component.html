@@ -6,7 +6,7 @@
     <h3 
         *ngIf="!edit" 
         class="mt-3 font-bold text-xl cursor-context-menu"
-        (dblclick)="handleEdit()" 
+        (dblclick)="edit = true" 
         
     >
         {{ todoList?.name }}
@@ -15,7 +15,8 @@
     <!-- Oder Form um titel umzubenennen -->
     <app-edit-todo-list-name
     *ngIf="edit"
-    [handleEdit]="handleEdit"
+    [listId]="todoList?._id"
+    (newTitleEvent)="handleEdit()"
     ></app-edit-todo-list-name>
 
 

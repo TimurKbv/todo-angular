@@ -25,8 +25,7 @@ export class TodoListComponent implements OnInit {
   }
 
   handleEdit() {
-    console.log('is edit? ', this.edit);
-    this.edit = !this.edit;
+    this.edit = false;
   }
     
 

@@ -2,12 +2,14 @@
 
 <form 
     class="w-full bg-gray-800 p-3 rounded-2xl "
+    (ngSubmit)="submitNewTitle()"
+    [formGroup]="form"
 >
     <input 
         type="text"
         class="bg-transparent w-full border-none outline-none"
         placeholder="Edit list name"
-        id="edot-listname-input"
-        
-    >
+        id="edit-listname-input"
+        formControlName="title"
+    >   
 </form>
