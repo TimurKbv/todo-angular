@@ -17,19 +17,17 @@ export class TodoComponent {
   constructor(private todoService: TodoService) {}
 
   form = new FormGroup({
-    text: new FormControl<string>('', [
-
-    ] )
+    text: new FormControl<string>('', {
+      
+    } )
+    
   })
 
   get text() {
     return this.form.controls.text as FormControl;
   }
 
-
   handleCheckbox() {
-    console.log(this.todo);
-    console.log(this.todoList);
     let newIsChecked = !this.todo.isChecked;
 
     let newData = {
@@ -40,18 +38,23 @@ export class TodoComponent {
     this.todoService.updateTodo(this.todoList?._id, this.todo, newData)
     .subscribe(() => {
       this.todo.isChecked = newIsChecked;
-      console.log(this.todo);
+
     })
   }
 
+  activateEditForm() {
+    this.text.setValue(this.todo.text)
+    this.edit = true;
+  }
+
   handleText() {
-    console.log(this.todo);
+
+
 
     this.todoService.updateTodo(this.todoList?._id, this.todo, {
       text: this.form.value.text as string,
       isChecked: this.todo.isChecked
     }).subscribe(todo => {
-      console.log(todo);
       this.todo = todo;
     })
     this.edit = false;

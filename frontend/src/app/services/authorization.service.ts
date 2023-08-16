@@ -10,6 +10,7 @@ import { ErrorService } from './error.service';
 export class AuthorizationService {
 
   user: IUser | null = null; 
+  token: string | null = null;
 
   constructor(
     private http: HttpClient,
@@ -17,19 +18,24 @@ export class AuthorizationService {
     ) { }
 
   isAuthenticated() {
+    
     return this.user !== null;
   }
 
   validateToken(): Observable<IUser> {
     const token = localStorage.getItem('token');
+    console.log(token);
+    
+    
     return this.http.get<IUser>('http://localhost:8080/users/user', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
-    }).pipe(
-      tap(user => this.user = user),
-      catchError(this.errorHandler.bind(this))
-    )
+    }).pipe(tap(user => {
+      this.user = user;
+      console.log(user);
+      this.login(user.user.username, user.user.password)
+    }))
   }
 
   login(username: any, password: any): Observable<IUser> {
@@ -51,7 +57,8 @@ export class AuthorizationService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    this.token = localStorage.getItem('token');
+    return this.token;
   }
 
   logout() {

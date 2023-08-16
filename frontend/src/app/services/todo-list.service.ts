@@ -53,11 +53,15 @@ export class TodoListService {
   }
 
   deleteTodoList(listId: string) {
-    return this.http.delete('http://localhost:8080/todolists' + listId, {
+    return this.http.delete('http://localhost:8080/todolists/' + listId, {
       headers: {
         'Authorization': `Bearer ${this.token}`
       }
-    }) //TODO delete list from array
+    }).pipe(tap(list => {
+      let listIndex = this.todoLists.findIndex(todoList => todoList._id === listId);
+      this.todoLists.splice(listIndex, 1);
+    }
+    )) //TODO delete list from array
   }
  
   private errorHandler(error: HttpErrorResponse) {

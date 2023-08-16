@@ -22,7 +22,7 @@ export const getUserBySessionToken = (sessionToken: string) => UserModel.findOne
     'authentication.sessionToken': sessionToken
 });
 // By Username
-export  const findUserByUsername = async (username: string) => UserModel.findOne({username});
+export  const findUserByName = async (username: string) => UserModel.findOne({username});
 // By ID
 export const getUserById = (id: string) => UserModel.findById(id);
 // Create User

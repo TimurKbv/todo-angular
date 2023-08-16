@@ -36,7 +36,7 @@ export async function login(req: express.Request, res: express.Response) {
     let { username, password } = req.body;
 
     // Hole entsprechenden User per username aus der DB
-    let currUser = await UserModel.findUserByUsername(username);
+    let currUser = await UserModel.findUserByName(username);
 
     // Wenn user nicht gefunden wurde
     if (currUser === null) {
