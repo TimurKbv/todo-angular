@@ -25,6 +25,7 @@ export class TodosPageComponent implements OnInit ,OnChanges{
 
   ngOnInit(): void {
     this.loading = true;
+    
     if (this.authService.isAuthenticated()) {
       this.todoService.getAllLists().subscribe(lists => {
         console.log(lists)

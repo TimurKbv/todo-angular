@@ -66,6 +66,12 @@ export class AuthorizationService {
     this.user = null;
   }
 
+  register(user: Object): Observable<IUser> {
+    console.log(user);
+    
+    return this.http.post<IUser>('http://localhost:8080/auth/register', user)
+  }
+
   // ERROR HANDLER
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.message);

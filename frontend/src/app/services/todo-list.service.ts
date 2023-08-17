@@ -30,7 +30,6 @@ export class TodoListService {
         'Authorization': `Bearer ${this.token}`
       }
     }).pipe(
-      retry(2),
       tap(todoLists => this.todoLists = todoLists),
       catchError(this.errorHandler.bind(this))
     )

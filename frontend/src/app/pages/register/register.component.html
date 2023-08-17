@@ -1,1 +1,86 @@
-<p>register works!</p>
+
+
+<div class="max-w-xs mx-auto mt-20">
+    <form
+        class="rounded-3xl bg-zinc-900  px-10 mb-5 py-7 min-w-max shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]"
+        (ngSubmit)="submitHandler()"
+        [formGroup]="registerForm"
+    >
+        <!-- Fullname -->
+        <div class="mb-6 border-b border-gray-500">
+            <label for="fullname" class="block text-gray-600 text-sm font-bold mb-2">
+                Fullname
+            </label>
+            <input 
+                type="text" 
+                class="bg-transparent w-full border-none outline-none  focus:outline-none"
+                id="fullname"
+                placeholder="Max Mustermann"
+                formControlName="fullname"
+            >
+        </div>
+        <!-- City -->
+        <div class="mb-6 border-b border-gray-500">
+            <label for="city" class="block text-gray-600 text-sm font-bold mb-2">
+                City
+            </label>
+            <input 
+                type="text" 
+                class="bg-transparent w-full border-none outline-none  focus:outline-none"
+                id="city"
+                placeholder="Berlin"
+                formControlName="city"
+            >
+        </div>
+        <!-- Email -->
+        <div class="mb-6 border-b border-gray-500">
+            <label for="email" class="block text-gray-600 text-sm font-bold mb-2">
+                Email
+            </label>
+            <input 
+                type="email" 
+                class="bg-transparent w-full border-none outline-none  focus:outline-none"
+                id="email"
+                placeholder="Max@Mustermann.com"
+                formControlName="email"
+            >
+        </div>
+        <!-- Username -->
+        <div class="mb-6 border-b border-gray-500">
+            <label for="username" class="block text-gray-600 text-sm font-bold mb-2">
+                Username
+            </label>
+            <input 
+                type="text" 
+                class="bg-transparent w-full border-none outline-none  focus:outline-none"
+                id="username"
+                placeholder="maxmus"
+                formControlName="username"
+            >
+            <p  class="text-red-500 text-xs italic">Username should be longer than 3 letters</p>
+        </div>
+        <!-- Password -->
+        <div class="mb-6 border-b border-gray-500">
+            <label for="password" class="block text-gray-600 text-sm font-bold mb-2">
+                Password
+            </label>
+            <input 
+                type="password" 
+                class="bg-transparent w-full border-none outline-none  focus:outline-none"
+                id="password"
+                placeholder="**********"
+                formControlName="password"
+            >
+            <p class="text-red-500 text-xs italic">Password schould be longer!</p>
+        </div>
+        <div class="flex items-center justify-between">
+            <button 
+                class="bg-blue-700 hover:bg-blue-500 text-gray-900 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                type="submit">
+                Registration
+            </button>
+
+        </div>
+
+    </form>
+</div>
