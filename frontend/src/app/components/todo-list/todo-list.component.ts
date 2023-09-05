@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { ITodo } from 'src/app/models/todo';
 import { ITodoList } from 'src/app/models/todoList';
 import { TodoListService } from 'src/app/services/todo-list.service';
@@ -9,11 +10,16 @@ import { TodoListService } from 'src/app/services/todo-list.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.css']
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent implements OnInit, OnDestroy {
   @Input() todoList?: ITodoList;
 
   edit: boolean = false;
   addTodo: boolean = false;
+
+  // subscription?: Subscription;
+  // subscriptions: Subscription[] = [];
+  destroy$ = new Subject();
+
 
   constructor(
     private todolistService: TodoListService
@@ -58,14 +64,35 @@ export class TodoListComponent implements OnInit {
 
   deleteTodoList() {
     console.log(this.todoList?.name);
+    // 1 subscribe
+    // this.subscription = this.todolistService.deleteTodoList(this.todoList?._id as string)
+    // .subscribe(list => console.log(list)
+    // )
+
+    // array
+    // this.subscriptions.push(this.todolistService.deleteTodoList(this.todoList?._id as string)
+    // .subscribe(list => console.log(list)
+    // ))
+
     this.todolistService.deleteTodoList(this.todoList?._id as string)
-    .subscribe(list => console.log(list)
+    .pipe(
+      takeUntil(this.destroy$)
     )
+    .subscribe(list => console.log(list))
+
   }
 
 
   ngOnInit(): void {
     this.todolistService.getAllLists()
+  }
+
+  ngOnDestroy(): void {
+    // this.subscription?.unsubscribe();
+    // this.subscriptions.forEach(sub => sub.unsubscribe())
+
+    this.destroy$.next(true)
+    this.destroy$.complete()
   }
 
 }

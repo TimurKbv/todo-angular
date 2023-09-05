@@ -57,7 +57,10 @@
                 placeholder="maxmus"
                 formControlName="username"
             >
-            <p  class="text-red-500 text-xs italic">Username should be longer than 3 letters</p>
+            <p  
+                class="text-red-500 text-xs italic"
+                *ngIf="this.registerForm.get('username')?.invalid && this.registerForm.get('username')?.touched"
+            >Username required</p>
         </div>
         <!-- Password -->
         <div class="mb-6 border-b border-gray-500">
@@ -71,11 +74,19 @@
                 placeholder="**********"
                 formControlName="password"
             >
-            <p class="text-red-500 text-xs italic">Password schould be longer!</p>
+            <p 
+                class="text-red-500 text-xs italic"
+                *ngIf="this.registerForm.get('password')?.invalid && this.registerForm.get('password')?.touched"
+            >Password is required (min 8, max 20,(min one Uppercase, one Lowecase, one number) )</p>
         </div>
         <div class="flex items-center justify-between">
             <button 
-                class="bg-blue-700 hover:bg-blue-500 text-gray-900 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
+                [disabled]="registerForm.invalid"
+                [ngClass]="{
+                    'hover:bg-blue-500 bg-blue-700': registerForm.valid,
+                    'bg-gray-400': registerForm.invalid
+                }"
+                class="  text-gray-900 font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                 type="submit">
                 Registration
             </button>

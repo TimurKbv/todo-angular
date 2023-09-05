@@ -32,24 +32,23 @@ export class LoginComponent implements OnInit {
     .subscribe(user => {
       this.authService.authenticate(user)
       this.router.navigate(['/'])
+      
   })
     // this.authService.authenticate(this.authService.user)
-    
+    // this.router.navigate(['/'])
   }
 
   ngOnInit(): void {
-    if (this.token && !this.authService.isAuthenticated()) {
-      this.authService.validateToken().subscribe(user => {
-        this.authService.authenticate(user)
-        this.router.navigate(['/'])
-      }
-      
-      )
-    }
+    console.log(this.authService.isAuthenticated());
+    
     if (this.authService.isAuthenticated()) {
+      
       this.router.navigate(['/'])
+    }
+    if (this.token && !this.authService.isAuthenticated()) {
+      this.authService.validateToken();
+      // this.router.navigate(['/'])
     }
   }
   
-
 }

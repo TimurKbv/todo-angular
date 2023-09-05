@@ -27,7 +27,7 @@ export class RegisterComponent {
     ]),
     password: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(6)
+      Validators.pattern( /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&? "])[a-zA-Z0-9!#$%&?]{8,20}$/ )
     ])
   });
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { ITodoList } from 'src/app/models/todoList';
 import { TodoListService } from 'src/app/services/todo-list.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './todos-page.component.html',
   styleUrls: ['./todos-page.component.css']
 })
-export class TodosPageComponent implements OnInit ,OnChanges{
+export class TodosPageComponent implements OnInit {
 
   loading = false;
 
@@ -26,30 +26,16 @@ export class TodosPageComponent implements OnInit ,OnChanges{
   ngOnInit(): void {
     this.loading = true;
     
-    if (this.authService.isAuthenticated()) {
       this.todoService.getAllLists().subscribe(lists => {
         console.log(lists)
         this.todoService.todoLists = lists;
         this.loading = false;
       }
       )
-      this.authService.validateToken()
-    } else if(this.authService.token) {
-      console.log(this.authService.token);
-      this.authService.validateToken()
-    }
-    else {
-      this.router.navigate(['/login'])
-    }
-    
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.todoService.getAllLists().subscribe(lists => {
-      console.log(lists)
-      this.todoService.todoLists = lists;
-    }
-    )
-    this.authService.validateToken()
-  }
+  // ngDoCheck(): void {
+  //   console.log('Docheck');
+    
+  // }
 }

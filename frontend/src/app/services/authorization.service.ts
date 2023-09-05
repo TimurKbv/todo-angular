@@ -17,7 +17,9 @@ export class AuthorizationService {
     private errorService: ErrorService
     ) { }
 
+
   isAuthenticated() {
+    console.log(this.user);
     
     return this.user !== null;
   }
@@ -25,7 +27,6 @@ export class AuthorizationService {
   validateToken(): Observable<IUser> {
     const token = localStorage.getItem('token');
     console.log(token);
-    
     
     return this.http.get<IUser>('http://localhost:8080/users/user', {
       headers: {
@@ -36,6 +37,15 @@ export class AuthorizationService {
       console.log(user);
       this.login(user.user.username, user.user.password)
     }))
+    
+  }
+
+  getToken() {
+    return localStorage.getItem('token')
+  }
+
+  isLoggedIn() {
+    return (this.getToken() !== null && this.getToken() !== undefined) ? false : true;
   }
 
   login(username: any, password: any): Observable<IUser> {
@@ -54,11 +64,6 @@ export class AuthorizationService {
     localStorage.setItem('token', user.user.token);
     console.log('User authenticated!');
     
-  }
-
-  getToken() {
-    this.token = localStorage.getItem('token');
-    return this.token;
   }
 
   logout() {
